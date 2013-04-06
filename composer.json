@@ -1,0 +1,28 @@
+{
+    "name": "vxo/vxo-locale",
+    "description": "ZF2 Module to implement new locale",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "zend",
+        "module"
+    ],
+    "homepage": "https://github.com/vadexito/vxo-locale",
+    "authors": [
+        {
+            "name": "Vadexito"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "VxoLocale": "src/"
+        },
+        "classmap": [
+            "./"
+        ]
+    }
+}
