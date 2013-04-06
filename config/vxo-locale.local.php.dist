@@ -1,0 +1,8 @@
+<?php
+return [
+    'vxo_locale' => [
+        'session' => [
+            'namespace'   => 'vxo',
+        ],
+    ],
+];
