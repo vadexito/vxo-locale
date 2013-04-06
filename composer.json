@@ -5,7 +5,8 @@
     "keywords": [
         "zf2",
         "zend",
-        "module"
+        "module",
+        "locale",
     ],
     "homepage": "https://github.com/vadexito/vxo-locale",
     "authors": [
