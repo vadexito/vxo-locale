@@ -10,7 +10,7 @@ class LocaleController extends AbstractActionController
     
     public function changeAction()
     {
-        $locale = $this->params()->fromRoute('locale', '');
+        $locale = $this->getRequest()->getQuery()['locale'] || $this->params()->fromRoute('locale', '');
         
         if (!$locale) {
             return $this->redirect()->toRoute($this->getRedirectRoute());
