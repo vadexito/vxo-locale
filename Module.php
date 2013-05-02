@@ -18,12 +18,11 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $services = $e->getApplication()->getServiceManager();
-        $em = $e->getApplication()->getEventManager();
-        
         $session = $services->get('session-factory-service');
+        
         if ($session->locale){            
             $locale = $session->locale;
-        } else {
+        } else {            
             $locale = Locale::getDefault();
             $session->locale = $locale;
         }
@@ -31,7 +30,7 @@ class Module
         
         if ($services->get('translator')){
             $services->get('translator')->setLocale($locale)
-                                    ->setFallbackLocale('en_US');
+                                        ->setFallbackLocale('en_US');
         }
     }
     
@@ -55,10 +54,20 @@ class Module
     {
         return [
             'factories' => [
-                'language' => function ($sm) {   
-                    $session = $sm->getServiceLocator()->get('session-factory-service');
+                'language' => function ($sm) {  
+                    $sl = $sm->getServiceLocator();
+                    $session = $sl->get('session-factory-service');
                     $viewHelper = new View\Helper\Language();
                     $viewHelper->setSession($session);
+                    $languages =$sl->get('config')['vxolocale']['languages'];
+                    $viewHelper->setLanguages($languages);
+                    return $viewHelper;
+                },
+                'selectLanguage' => function ($sm) {  
+                    $sl = $sm->getServiceLocator();
+                    $viewHelper = new View\Helper\SelectLanguage();
+                    $languages =$sl->get('config')['vxolocale']['languages'];
+                    $viewHelper->setLanguages($languages);
                     return $viewHelper;
                 },
             ],
