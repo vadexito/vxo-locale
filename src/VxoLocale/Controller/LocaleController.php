@@ -22,6 +22,7 @@ class LocaleController extends AbstractActionController
         if (!$locale) {
             return $this->redirect()->toRoute($this->getRedirectRoute());
         }
+        
         $this->getServiceLocator()->get('session-factory-service')->locale = $locale;
         
         return $this->redirect()->toRoute($this->getRedirectRoute());

@@ -1,0 +1,29 @@
+<?php
+return [
+    'vxolocale' => [
+        'session' => [
+            'namespace'   => 'vxo',
+        ],
+        'languages' => [
+            'authorized' => [
+                'fr_FR' => [
+                    'name' => _('French'),
+                    'localName' => 'français',
+                    'alias' => ['fr','fr-FR'],
+                ],
+                'en_US' => [
+                    'name' => _('English'),
+                    'localName' => 'English',
+                ],
+                'de_DE' =>[
+                    'name' => _('German'),
+                    'localName' => 'Deutsch',
+                ],
+                'pl_PL' => [
+                    'name' => _('Polish'),
+                    'localName' => 'Polski',
+                ],
+            ],
+        ],
+    ],
+];

@@ -4,22 +4,29 @@ namespace VxoLocale\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\Session\Container as Session;
+use Locale;
+use Zend\Stdlib\Parameters;
 
 class Language extends AbstractHelper
 {
     protected $session;
+    protected $languages;
     
-    public function __invoke()
+    public function __invoke($translate = true)
     {
-        switch($this->getSession()->locale){
-            case 'de_DE' :
-                return $this->getView()->translate('German');
-            case 'fr_FR' :
-                return $this->getView()->translate('French');
-            case 'en_US' :
-                return $this->getView()->translate('English');
-            default:
-                return '';
+        $languages = new Parameters($this->getLanguages());
+        
+        $locale = Locale::getDefault();
+        
+        foreach ($languages->get('authorized') as $authLocale => $language) {
+            $language = new Parameters($language);
+            if ($locale === $authLocale 
+                    || in_array($locale,$language->get('alias',[]))){
+                if ($translate === true){
+                    return $this->getView()->translate($language->get('name'));
+                }
+                return $language->get('name');
+            }
         }
     }
     
@@ -31,5 +38,15 @@ class Language extends AbstractHelper
     public function getSession()
     {
         return $this->session;
+    }
+    
+    public function setLanguages(Array $languages)
+    {
+        $this->languages = $languages;
+    }
+    
+    public function getLanguages()
+    {
+        return $this->languages;
     }
 }
