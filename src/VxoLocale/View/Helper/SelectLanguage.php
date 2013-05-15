@@ -4,15 +4,16 @@ namespace VxoLocale\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\Stdlib\Parameters;
+use Zend\View\Helper\AbstractHtmlElement;
 
-class SelectLanguage extends AbstractHelper
+class SelectLanguage extends AbstractHtmlElement
 {
     protected $languages;
+    protected $_label = NULL;
     
     public function __invoke()
     {
-        return $this->render();
-        
+        return $this;
     }
     
     public function renderListLanguages()
@@ -35,16 +36,35 @@ class SelectLanguage extends AbstractHelper
         return $this->getView()->htmlList($items, false,$attribs, false);
     }
     
-    public function render()
+    public function __toString()
     {
-        $title = $this->getView()->translate('Language: ').$this->getView()->language();
-        $linkTitle = '<a class="dropdown-toggle" id="drop_languages" role="button" data-toggle="dropdown"><h5 id="language_title">'
-            .$title.' <b class="caret"></b></h5></a>';
+        if (!$this->_label){
+            $this->setLabel('Language: '.$this->getView()->language());
+        }
+        $linkAttrib = [
+            'class' => 'dropdown-toggle',
+            'id' => 'drop_languages',
+            'data-toggle' => 'dropdown',
+        ];
+        
+        $linkTitle = '<a '.$this->htmlAttribs($linkAttrib).'><h5 id="language_title">'
+            .$this->getLabel().' <b class="caret"></b></h5></a>';
         
         return '<ul><li class="footer-item dropdown">'
             .$linkTitle
             .$this->renderListLanguages()
             .'</li></ul>';
+    }
+    
+    public function setLabel($label)
+    {
+        $this->_label = $label;
+        return $this;
+    }
+    
+    public function getLabel()
+    {
+        return $this->_label;
     }
     
     public function setLanguages(Array $languages)
