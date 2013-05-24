@@ -9,7 +9,7 @@
 
 namespace VxoLocale;
 
-use Zend\Mvc\MvcEvent;
+use Zend\EventManager\EventInterface;
 use Locale;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -20,7 +20,7 @@ class Module implements
     ConfigProviderInterface,
     AutoloaderProviderInterface
 {
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(EventInterface $e)
     {
         $services = $e->getApplication()->getServiceManager();
         $session = $services->get('session-factory-service');
