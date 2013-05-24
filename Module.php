@@ -9,11 +9,16 @@
 
 namespace VxoLocale;
 
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Locale;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
-class Module
+class Module implements 
+    BootstrapListenerInterface,
+    ConfigProviderInterface,
+    AutoloaderProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
