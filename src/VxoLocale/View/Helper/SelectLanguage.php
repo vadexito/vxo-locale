@@ -30,6 +30,7 @@ class SelectLanguage extends AbstractHtmlElement
             'id' => 'menu1',
             'class' => 'dropdown-menu',
             'aria-labelledby' => 'drop_languages',
+            'href' => '#',
             
         ];
         
